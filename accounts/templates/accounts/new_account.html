@@ -1,4 +1,5 @@
 {% extends "accounts/_base.html" %}
 {% block contents %}
-{{ form.as_p }}
+    {% csrf_token %}
+    {{ form.as_p }}
 {% endblock %}

@@ -3,10 +3,7 @@ from django.contrib import admin
 import accounts.views
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'sandbox.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/', accounts.views.NewUserForm.as_view(), name='accounts'),
+    url(r'^accounts/', accounts.views.NewUserView.as_view(), name='accounts'),
 )
