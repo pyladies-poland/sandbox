@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class User(models.Model):
-    user_id = models.OneToOneField(User)
     user_email = models.EmailField(max_length=100, unique=True)
     user_password = models.CharField(max_length=20)
     user_name = models.CharField(max_length=50)
