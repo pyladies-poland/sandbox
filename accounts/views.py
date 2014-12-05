@@ -6,12 +6,13 @@ from django.core.mail import send_mail
 
 from accounts.forms import NewUserForm
 from sandbox.settings import EMAIL_HOST_USER
-
+from django.core.urlresolvers import reverse_lazy
 
 class NewUserView(generic.CreateView):
     template_name = "accounts/new_account.html"
     success_url = '/accounts/success/'
     form_class = NewUserForm
+    reverse_lazy('success_created')
 
 
     def form_valid(self, form):
