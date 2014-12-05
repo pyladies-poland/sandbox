@@ -11,11 +11,13 @@ class User(models.Model):
     user_name = models.CharField(max_length=50)
     user_surname = models.CharField(max_length=50)
     user_gender = models.IntegerField(choices=GENDER)
-    user_telnr = models.CharField(max_length=20)
-    user_addres = models.CharField(max_length=200)
+    user_telephone_number = models.CharField(max_length=20)
+    user_address = models.CharField(max_length=200)
     user_register_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     user_register_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-
+    user_activation_key = models.CharField(max_length=40)
+    user_akey_expires = models.DateTimeField()
+    user_is_activ = models.BooleanField(default=False)
 
     def __unicode__(self):
         return '{} {}'.format(self.user_name, self.user_surname)
