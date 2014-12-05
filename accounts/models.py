@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class User(models.Model):
 
     GENDER = ((1, 'Female'), (2, 'Male'))
@@ -14,6 +15,7 @@ class User(models.Model):
     user_addres = models.CharField(max_length=200)
     user_register_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     user_register_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
+
 
     def __unicode__(self):
         return '{} {}'.format(self.user_name, self.user_surname)
