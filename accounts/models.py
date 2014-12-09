@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -15,8 +16,8 @@ class User(models.Model):
     user_address = models.CharField(max_length=200)
     user_register_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     user_register_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
-    user_activation_key = models.CharField(max_length=40)
-    user_akey_expires = models.DateTimeField()
+    user_activation_key = models.CharField(max_length=40, default='')
+    user_akey_expires = models.DateTimeField(default=datetime.datetime.today() + datetime.timedelta(2))
     user_is_activ = models.BooleanField(default=False)
 
     def __unicode__(self):
