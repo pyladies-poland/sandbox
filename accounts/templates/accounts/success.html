@@ -1,13 +1,7 @@
 {% extends "accounts/_base.html" %}
 
 {% block contents %}
-<h1>Congratulation You Created a User profile!</h1>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create" />
-    </form>
-
+    <h1>Congratulation You Created a User profile!</h1>
 
 {% endblock %}
