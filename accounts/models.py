@@ -1,6 +1,7 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class User(models.Model):
@@ -17,7 +18,7 @@ class User(models.Model):
     register_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     register_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     activation_key = models.CharField(max_length=40, default='')
-    akey_expires = models.DateTimeField(default=datetime.datetime.today() + datetime.timedelta(2))
+    akey_expires = models.DateTimeField(default=timezone.now() + datetime.timedelta(2))
     is_active = models.BooleanField(default=False)
 
     def __unicode__(self):
