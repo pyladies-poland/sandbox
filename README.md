@@ -1,6 +1,9 @@
-sandbox
+The Sandbox App
 =======
 
-piaskownica.pl workshop project
+The Sandbox App is an application for parents with children who wants to:
+* Go for a walk with another parent
+* Find a playground nearby and review it
+* Find a person who can look after Your kid for few hours
 
-Prosiłbym bardzo, żeby ktoś tu wypisał główne założenia projektu. Po co to robimy, dlaczego to robimy itd.
+This app is created by students on classes conducted by PyLadies Poland.
