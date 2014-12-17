@@ -1,0 +1,9 @@
+Django==1.7.1
+basicauth==0.3
+django-social-auth==0.7.28
+django-zurb-foundation==5.4.7
+httplib2==0.9
+oauth2==1.5.211
+python-oauth2==0.7.0
+python-openid==2.2.5
+wsgiref==0.1.2
