@@ -20,6 +20,7 @@ class User(models.Model):
     activation_key = models.CharField(max_length=40, default='')
     akey_expires = models.DateTimeField(default=timezone.now() + datetime.timedelta(2))
     is_active = models.BooleanField(default=False)
+    #is_authenticated = models.BooleanField(default=False)
 
     def __unicode__(self):
         return '{} {}'.format(self.name, self.surname)
@@ -27,4 +28,8 @@ class User(models.Model):
     @property
     def get_email(self):
         return self.email
+'''
+    def is_authenticated(self):
+        return self.is_authenticated
 
+'''

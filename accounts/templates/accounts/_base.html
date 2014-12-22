@@ -1,5 +1,10 @@
 <!-- extends 'foundation/base.html' -->
 
+      {% if user.is_authenticated %}
+          You are logged in as <code>{{ user.name }}</code>!
+      {% endif %}
+
+
 {% block contents %}
 {% endblock %}
 

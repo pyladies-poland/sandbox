@@ -1,10 +1,13 @@
-import datetime, random, sha
+import random, sha
 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, render, redirect
 from django.utils import timezone
 from django.views import generic
+
 
 from accounts.forms import NewUserForm
 from accounts.models import User
@@ -37,3 +40,22 @@ def activate(request, activation_key):
     profile.activation_key = ''
     profile.save()
     return render_to_response('accounts/activate.html', {'success': True})
+
+
+def loginview(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    user = authenticate(username=email, password=password)
+    if user.is_active:
+        login(request, user)
+    return render(request, 'accounts/login.html')
+
+
+@login_required(login_url='/')
+def home(request):
+    return render_to_response('accounts/home.html')
+
+
+def logoutview(request):
+    logout(request)
+    return redirect('/')
