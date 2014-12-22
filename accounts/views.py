@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.views import generic
 
 
-from accounts.forms import NewUserForm
+from accounts.forms import NewUserForm, LogIn
 from accounts.models import User
 from sandbox.settings import EMAIL_HOST_USER, HOST_NAME
 
@@ -42,14 +42,17 @@ def activate(request, activation_key):
     return render_to_response('accounts/activate.html', {'success': True})
 
 
-def loginview(request):
-    email = request.POST['email']
-    password = request.POST['password']
-    user = authenticate(username=email, password=password)
-    if user.is_active:
-        login(request, user)
-    return render(request, 'accounts/login.html')
+class LogInView(generic.CreateView):
+    template_name = "accounts/login.html"
+    form_class = LogIn
 
+    def form_valid(self, request):
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(email=email, password=password)
+        if user.is_active:
+            login(request, user)
+        return render(request, 'accounts/login.html')
 
 @login_required(login_url='/')
 def home(request):
