@@ -33,7 +33,6 @@ class User(AbstractBaseUser):
     GENDER = ((1, 'Female'), (2, 'Male'))
 
     email = models.EmailField(max_length=100, unique=True)
-
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     gender = models.IntegerField(choices=GENDER, default=1)

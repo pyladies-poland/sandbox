@@ -1,7 +1,6 @@
 import random, sha
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import get_object_or_404, render_to_response, render, redirect
@@ -16,11 +15,12 @@ from sandbox.settings import EMAIL_HOST_USER, HOST_NAME
 
 class NewUserView(generic.CreateView):
     template_name = "accounts/new_account.html"
-    success_url = reverse_lazy('success_created')
+    success_url = reverse_lazy('accounts:success_created')
     form_class = NewUserForm
 
     def form_valid(self, form):
         new_user = form.save()
+        new_user.set_password(form.cleaned_data["password"])
         salt = sha.new(str(random.random())).hexdigest()[:5]
         new_user.activation_key = sha.new(salt+new_user.name).hexdigest()
         new_user.save()
@@ -52,14 +52,16 @@ class LogInView(generic.FormView):
         password = f.cleaned_data['password']
         user = authenticate(email=email, password=password)
         if user.active:
-            login(user)
-        return render('accounts/login.html')
+            login(self.request, user)
+        return render_to_response('accounts/home.html', {'success': True})
 
-@login_required(login_url='/')
-def home(request):
-    return render_to_response('accounts/home.html')
+#add later user decorator
+class HomeView(generic.ListView):
+    template_name = 'accounts/home.html'
+    context_object_name = 'User_list'
+    model = User
 
 
-def logoutview(request):
+def logout_view(request):
     logout(request)
-    return redirect('./')
+    return render_to_response('accounts/home.html', {'success': True})
