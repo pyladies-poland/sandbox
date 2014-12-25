@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.views import generic
 
 
-from accounts.forms import NewUserForm, LogIn
+from accounts.forms import NewUserForm, LogInForm
 from accounts.models import User
 from sandbox.settings import EMAIL_HOST_USER, HOST_NAME
 
@@ -36,23 +36,24 @@ def activate(request, activation_key):
     profile = get_object_or_404(User, activation_key=activation_key)
     if profile.akey_expires < timezone.now():
         return render_to_response('accounts/activate.html', {'expired': True})
-    profile.is_active = True
+    profile.active = True
     profile.activation_key = ''
     profile.save()
     return render_to_response('accounts/activate.html', {'success': True})
 
 
-class LogInView(generic.CreateView):
+class LogInView(generic.FormView):
     template_name = "accounts/login.html"
-    form_class = LogIn
+    form_class = LogInForm
 
-    def form_valid(self, request):
-        email = request.POST['email']
-        password = request.POST['password']
+    def form_valid(self, form):
+        f = form
+        email = f.cleaned_data['email']
+        password = f.cleaned_data['password']
         user = authenticate(email=email, password=password)
-        if user.is_active:
-            login(request, user)
-        return render(request, 'accounts/login.html')
+        if user.active:
+            login(user)
+        return render('accounts/login.html')
 
 @login_required(login_url='/')
 def home(request):
@@ -61,4 +62,4 @@ def home(request):
 
 def logoutview(request):
     logout(request)
-    return redirect('/')
+    return redirect('./')
