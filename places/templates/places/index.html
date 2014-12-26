@@ -1,0 +1,11 @@
+{% extends "places/_base.html" %}
+
+{% block contents %}
+
+    <ul>
+        {%  for place in place_list %}
+            <li><a href="{% url 'places:place_detail' place.pid %}">{{ place.name }}</a> </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
