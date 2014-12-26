@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, url, include
 from django.views.generic import TemplateView
-#from social_auth.views import
 
 from accounts import views
 

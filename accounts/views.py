@@ -47,9 +47,8 @@ class LogInView(generic.FormView):
     form_class = LogInForm
 
     def form_valid(self, form):
-        f = form
-        email = f.cleaned_data['email']
-        password = f.cleaned_data['password']
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
         user = authenticate(email=email, password=password)
         if user.active:
             login(self.request, user)

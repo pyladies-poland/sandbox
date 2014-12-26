@@ -7,13 +7,13 @@ from django.utils import timezone
 
 class UserManager(BaseUserManager):
 
-  def _create_user(self, email, password, active, staff, superuser, **extra_fields):
+
+  def _create_user(self, email, password, active, staff, superuser,
+                   **extra_fields):
     now = timezone.now()
     email = self.normalize_email(email)
-    user = self.model(email=email,
-             staff=staff, active=active,
-             superuser=superuser,
-             register_date=now, **extra_fields)
+    user = self.model(email=email, staff=staff, active=active,
+                      superuser=superuser, register_date=now, **extra_fields)
     user.set_password(password)
     user.save(using=self._db)
     return user
@@ -42,7 +42,8 @@ class User(AbstractBaseUser):
     register_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     activation_key = models.CharField(max_length=40, default='')
     date_of_birth = models.DateTimeField(default=timezone.now())
-    akey_expires = models.DateTimeField(default=timezone.now() + datetime.timedelta(2))
+    akey_expires = models.DateTimeField(default=timezone.now() +
+                                                datetime.timedelta(2))
     active = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
     superuser = models.BooleanField(default=False)
@@ -58,10 +59,6 @@ class User(AbstractBaseUser):
     @property
     def get_email(self):
         return self.email
-
-    def get_full_name(self):
-        fullname = self.name + " " + self.surname
-        return self.fullname
 
     def get_short_name(self):
         return self.name
