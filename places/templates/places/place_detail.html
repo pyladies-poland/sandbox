@@ -1,0 +1,13 @@
+{% extends "places/_base.html" %}
+
+{% block contents %}
+
+    <h1>{{ place.name }}</h1>
+    <h5>Added on:{{ place.date_created }}</h5>
+    <h3>Description:
+        {{ place.description }}
+        <b>Address:</b></h3>
+    <h3>{{ place.address_street }}</h3>
+    <h3>{{ place.address_post_code }} {{ place.address_city }}</h3>
+
+{% endblock %}
