@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'places',
     'accounts',
     'foundation',
+    'easy_maps',
 )
 
 MIDDLEWARE_CLASSES = (
