@@ -48,6 +48,7 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=False)
     superuser = models.BooleanField(default=False)
 
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 

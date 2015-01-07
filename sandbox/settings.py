@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 
 from email_info import *
-from social_auth_config import *
+from social_auth_config_example import *  # creat config
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
