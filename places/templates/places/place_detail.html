@@ -12,5 +12,5 @@
     <h3>{{ place.address_street }}</h3>
     <h3>{{ place.address_post_code }} {{ place.address_city }}</h3>
 
-    {% easy_map place.full_address 400 400 %}
+    {% easy_map place.get_full_address 400 400 %}
 {% endblock %}
