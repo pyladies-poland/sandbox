@@ -42,8 +42,8 @@ class User(AbstractBaseUser):
     register_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     activation_key = models.CharField(max_length=40, default='')
     date_of_birth = models.DateTimeField(default=timezone.now())
-    akey_expires = models.DateTimeField(default=timezone.now() +
-                                                datetime.timedelta(2))
+    akey_expires = models.DateTimeField(default=lambda: timezone.now()
+                                        + datetime.timedelta(2))
     active = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
     superuser = models.BooleanField(default=False)

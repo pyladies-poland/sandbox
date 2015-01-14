@@ -1,4 +1,5 @@
 *.pyc
 *~
 *.sqlite3
+.idea
 social_auth_config.py

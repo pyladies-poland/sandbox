@@ -3,10 +3,9 @@
       {% if user.is_authenticated %}
           Welcome <code>{{ user.name }}</code>! Click to  <a href="{% url 'accounts:logout' %}">Logout</a>
       {% else %}
-          Pleas log in <a href="{% url 'accounts:login' %}">here</a> or <a href="{% url 'accounts:register' %}">Register</a>
+          Please log in <a href="{% url 'accounts:login' %}">here</a> or <a href="{% url 'accounts:register' %}">Register</a>
       {% endif %}
 
 
 {% block contents %}
 {% endblock %}
-

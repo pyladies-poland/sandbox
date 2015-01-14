@@ -36,9 +36,7 @@ def activate(request, activation_key):
     profile = get_object_or_404(User, activation_key=activation_key)
     if profile.akey_expires < timezone.now():
         return render_to_response('accounts/activate.html', {'expired': True})
-    profile.active = True
-    profile.activation_key = ''
-    profile.save()
+    profile.save(update_fields=['active', 'activation_key'])
     return render_to_response('accounts/activate.html', {'success': True})
 
 
@@ -52,7 +50,7 @@ class LogInView(generic.FormView):
         user = authenticate(email=email, password=password)
         if user.active:
             login(self.request, user)
-        return render_to_response('accounts/home.html', {'success': True})
+        return redirect('accounts/home.html', {'success': True})
 
 #add later user decorator
 class HomeView(generic.ListView):
@@ -63,4 +61,4 @@ class HomeView(generic.ListView):
 
 def logout_view(request):
     logout(request)
-    return render_to_response('accounts/home.html', {'success': True})
+    return redirect('accounts/home.html', {'success': True})
