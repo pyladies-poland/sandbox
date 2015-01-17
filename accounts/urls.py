@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 
 from accounts import views
 
+
 urlpatterns = patterns('',
     url(r'^$', views.NewUserView.as_view(), name='register'),
     url(r'^success/$', TemplateView.as_view(template_name="accounts/success.html"), name='success_created'),

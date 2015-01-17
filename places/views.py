@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+from places.models import Place
+
+
+class IndexView(generic.ListView):
+    template_name = 'places/index.html'
+    context_object_name = 'place_list'
+    model = Place
+
+
+class PlaceDetailView(generic.DetailView):
+    template_name = 'places/place_detail.html'
+    model = Place

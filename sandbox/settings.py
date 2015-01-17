@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'places',
     'accounts',
     'foundation',
+    'easy_maps',
     'social.apps.django_app.default',
 )
 
@@ -71,8 +72,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 ROOT_URLCONF = 'sandbox.urls'
-
-
 
 WSGI_APPLICATION = 'sandbox.wsgi.application'
 
