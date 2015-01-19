@@ -1,13 +1,11 @@
 import datetime
+
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.utils import timezone
 
 
-
 class UserManager(BaseUserManager):
-
-
     def _create_user(self, email, password, active, staff, superuser,
                        **extra_fields):
         now = timezone.now()
@@ -20,7 +18,7 @@ class UserManager(BaseUserManager):
 
     def create_user(self, email=None, password=None, **extra_fields):
         return self._create_user(email, password, False, False, False,
-                     **extra_fields)
+                                 last_login=datetime.datetime.now(), **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
         user=self._create_user(email, password, True, True, True, **extra_fields)
@@ -41,13 +39,12 @@ class User(AbstractBaseUser):
     register_date = models.DateTimeField(auto_now=False, auto_now_add=True)
     register_updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     activation_key = models.CharField(max_length=40, default='')
-    date_of_birth = models.DateTimeField(default=timezone.now())
+    date_of_birth = models.DateTimeField(null=True)
     akey_expires = models.DateTimeField(default=lambda: timezone.now()
                                         + datetime.timedelta(2))
     active = models.BooleanField(default=False)
     staff = models.BooleanField(default=False)
     superuser = models.BooleanField(default=False)
-
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -77,3 +74,6 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return self.superuser
+
+    def get_last_login(self):
+        return self.last_login
