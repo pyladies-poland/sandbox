@@ -23,7 +23,7 @@ class Place(models.Model):
 
     def get_full_address(self):
         """
-        create string with full addresss
+        create string with full address
         """
         return force_text(self.address_country) + \
                ", " + force_text(self.address_city) + \
@@ -35,6 +35,6 @@ class Place(models.Model):
         self.longitude = new_geocode[1]
 
     def save(self, *args, **kwargs):
-        self.fill_geocode()
+        # self.fill_geocode()
         super(Place, self).save(*args, **kwargs)
 
