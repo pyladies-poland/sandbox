@@ -23,7 +23,7 @@ class Place(models.Model):
 
     def get_full_address(self):
         """
-        create string with full address
+        create string with full addresss
         """
         return force_text(self.address_country) + \
                ", " + force_text(self.address_city) + \
