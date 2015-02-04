@@ -1,11 +1,23 @@
 {% extends "accounts/_base.html" %}
 
 {% block contents %}
+<div id="newProfile">
+	<br><br>
+	<div id="titleNewProfile">
+		<p>Formularz tworzenia nowego użytkownika</p>
+	</div>	
+	<br>
+	<div id="descriptionNewProfile">
+		<p>Wypełnij poniższe pola a następnie kliknij "Utwórz"</p>
+	</div>
+
+</div>
+
 
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create" />
+        <input type="submit" value="Utwórz" />
     </form>
 
 
