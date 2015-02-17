@@ -1,14 +1,21 @@
 import random, sha
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse_lazy
-from django.shortcuts import get_object_or_404, render_to_response, render, redirect
+from django.core.urlresolvers import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import (
+    get_object_or_404,
+    render_to_response,
+    render,
+    redirect,
+)
 from django.utils import timezone
 from django.views import generic
 
 
-from accounts.forms import NewUserForm, LogInForm
+from accounts.forms import NewUserForm, LogInForm, EditUserForm
 from accounts.models import User
 from sandbox.settings import EMAIL_HOST_USER, HOST_NAME
 
@@ -52,7 +59,16 @@ class LogInView(generic.FormView):
             login(self.request, user)
         return redirect('accounts/home.html', {'success': True})
 
-#add later user decorator
+@login_required
+def EditUserView(request):
+    template_name = "accounts/edit_user.html"
+    form = EditUserForm(request.POST, instance=request.user)
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('update_profile_success'))
+    return render_to_response(template_name, {'form': form})
+
+
 class HomeView(generic.ListView):
     template_name = 'accounts/home.html'
     context_object_name = 'User_list'

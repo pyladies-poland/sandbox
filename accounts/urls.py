@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^login/$', views.LogInView.as_view(), name='login'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^home/$', views.HomeView.as_view(), name='home'),
+    url(r'^edit_user/$', views.EditUserView, name='edit_user'),
 )

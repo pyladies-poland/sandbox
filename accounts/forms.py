@@ -6,22 +6,34 @@ from accounts.models import User
 class NewUserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['email', 'password', 'name', 'surname', 'gender',
-                  'telephone_number', 'address']
+        fields = [
+            'email',
+            'password',
+            'name',
+            'surname',
+            'gender',
+            'telephone_number',
+            'address',
+        ]
         widgets = {'password': forms.PasswordInput()}
+
+
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'name',
+            'surname',
+            'gender',
+            'telephone_number',
+            'address',
+        ]
 
 
 class LogInForm(forms.Form):
     email = forms.CharField(max_length=200)
     password = forms.CharField(widget=forms.PasswordInput())
     widgets = {'password': forms.PasswordInput()}
-
-
-class UserDataEditForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['name', 'surname', 'gender', 'telephone_number', 'address',
-                  'date_of_birth']
 
 
 class UserPasswordChangeForm(forms.ModelForm):
