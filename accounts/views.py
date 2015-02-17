@@ -59,8 +59,8 @@ class LogInView(generic.FormView):
             login(self.request, user)
         return redirect('accounts/home.html', {'success': True})
 
-@login_required
-def EditUserView(request):
+
+def edit_user_view(request):
     template_name = "accounts/edit_user.html"
     form = EditUserForm(request.POST, instance=request.user)
     if form.is_valid() and request.method == "POST":
