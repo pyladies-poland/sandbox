@@ -60,13 +60,14 @@ class LogInView(generic.FormView):
         return redirect('accounts/home.html', {'success': True})
 
 
+@login_required()
 def edit_user_view(request):
     template_name = "accounts/edit_user.html"
-    form = EditUserForm(request.POST, instance=request.user)
-    if form.is_valid() and request.method == "POST":
+    form = EditUserForm(request.POST or None, instance=request.user)
+    if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('update_profile_success'))
-    return render_to_response(template_name, {'form': form})
+        return render(request, template_name, {'form': form})
+    return render(request, template_name, {'form': form})
 
 
 class HomeView(generic.ListView):
