@@ -10,12 +10,12 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from os.path import join
 
 from email_info import *
 from social_auth_config_example import *  # creat config
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -103,8 +103,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'accounts/templates'), )
 
 AUTH_USER_MODEL = 'accounts.User'
+
+MEDIA_ROOT = os.path.normpath(join(BASE_DIR, 'media'))
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.normpath(join(BASE_DIR, 'static'))
+STATIC_URL = '/static/'
