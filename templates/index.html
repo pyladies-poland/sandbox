@@ -4,6 +4,21 @@
         <link rel="stylesheet" href="/static/foundation/css/foundation.css"/>
         <link rel="stylesheet" href="/static/foundation/css/foundation-icons.css"/>
         <title>Sandbox</title>
+        <style type="text/css">
+        /* Footer */
+        .footer {
+            margin-bottom: 0;
+            bottom: 0;
+            position: fixed;
+            width: 100%;
+            height: 50px;
+            background-color: #333333;
+            color: #fff;
+        }
+        .footer img {
+            height: 50px;
+        }
+        </style>
     </head>
     <body>
         {% include 'common/topbar.html' %}
@@ -33,5 +48,6 @@
                  </div>
             </li>
         </ul>
+        {% include 'common/footer.html' %}
     </body>
 </html>

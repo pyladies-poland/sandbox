@@ -10,7 +10,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from os.path import join
 
 from email_info import *
 from social_auth_config_example import *  # creat config
@@ -69,6 +68,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
 )
 
 ROOT_URLCONF = 'sandbox.urls'
@@ -104,12 +105,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'accounts/templates'), )
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'accounts/templates'), 
+os.path.join(BASE_DIR, 'templates'))
 
 AUTH_USER_MODEL = 'accounts.User'
 
-MEDIA_ROOT = os.path.normpath(join(BASE_DIR, 'media'))
+MEDIA_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.normpath(join(BASE_DIR, 'static'))
+STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, 'static'))
 STATIC_URL = '/static/'
