@@ -57,7 +57,7 @@ class LogInView(generic.FormView):
         user = authenticate(email=email, password=password)
         if user.active:
             login(self.request, user)
-        return redirect('accounts/home.html', {'success': True})
+        return redirect('accounts:home')
 
 
 @login_required()
@@ -66,7 +66,7 @@ def edit_user_view(request):
     form = EditUserForm(request.POST or None, instance=request.user)
     if form.is_valid():
         form.save()
-        return render(request, template_name, {'form': form})
+        return redirect('accounts:edit_user')
     return render(request, template_name, {'form': form})
 
 
@@ -78,4 +78,4 @@ class HomeView(generic.ListView):
 
 def logout_view(request):
     logout(request)
-    return redirect('accounts/home.html', {'success': True})
+    return redirect('accounts:home')
